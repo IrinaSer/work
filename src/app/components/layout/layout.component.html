@@ -10,6 +10,9 @@
   <ibm-header [name]="api.hostName" brand="Сервер:" href="/">
   </ibm-header>
   <div class="container l-pv-l">
+    <div class="l-p-l l-mb-l" [style.background]="getColor(api.hostName)">
+      <p>Сервер: {{ api.hostName }}</p>
+    </div>
     <div class="bx--grid">
       <router-outlet></router-outlet>
     </div>

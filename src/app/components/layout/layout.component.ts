@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../services/api.service';
+import {Component, OnInit} from '@angular/core';
+import {ApiService} from '../../services/api.service';
 
 @Component({
   selector: 'app-layout',
@@ -13,4 +13,13 @@ export class LayoutComponent implements OnInit {
   ) { }
 
   ngOnInit() {}
+
+  public getColor(id) {
+    let hash = 0;
+    for (let i = 0; i < id.length; i++) {
+      const n = id.charCodeAt(i);
+      hash += n;
+    }
+    return 'hsla(' + hash + ', 50%, 50%, 0.7)';
+  }
 }
