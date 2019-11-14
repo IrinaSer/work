@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {BehaviorSubject} from 'rxjs';
 import {tap} from 'rxjs/operators';
-import {BASE_LINK} from '../constants';
 
 export interface IServiceSource {
   host_name: string;
@@ -34,7 +33,7 @@ export class ApiService {
 
   public fetchServerInfo() {
     this.isLoading = true;
-    return this.http.get(`${BASE_LINK}/notes`).subscribe(
+    return this.http.get(`http://${location.hostname}:5000/notes`).subscribe(
       (data: IServiceSource) => {
         this.updateServerInfo(data);
         this.isLoading = false;
@@ -46,7 +45,7 @@ export class ApiService {
   }
 
   public getComment(id: string) {
-    return this.http.get(`${BASE_LINK}/note/${id}`);
+    return this.http.get(`http://${location.hostname}:5000/note/${id}`);
   }
 
   public sendComment(comment) {
@@ -56,7 +55,7 @@ export class ApiService {
       })
     };
     return this.http
-      .post(`${BASE_LINK}/note`, comment, httpOptions)
+      .post(`http://${location.hostname}:5000/note`, comment, httpOptions)
       .pipe(tap((res: IServiceSource) => {
         const comments = this.comments.slice(0);
         comments.push(res.result);
